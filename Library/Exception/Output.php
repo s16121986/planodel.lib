@@ -264,7 +264,7 @@ abstract class Output {
 		//echo $exception->getTraceAsString();
 		$aTrace = self::getTrace($exception);
 		$sTrace = '[' . get_class($exception) . ']: ';
-		$sTrace .= self::getMessage($exception) . "\n";
+		$sTrace .= self::getMessage($exception) . ' in ' . $exception->getFile() . ':' . $exception->getLine() . "\n";
 		if ($html) {
 			if (self::$utf) {
 				$sTrace = htmlspecialchars($sTrace, ENT_COMPAT, 'UTF-8');

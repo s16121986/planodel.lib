@@ -102,8 +102,15 @@ abstract class Provider{
 		return (null === $this->exception);
 	}
 	
-	public static function setConfig($config) {
-		self::$config = $config;
+	public static function setConfig($config, $provider = null) {
+		if (null === $provider) {
+			self::$config = $config;
+		} else {
+			if (null === self::$config) {
+				self::$config = array('providers' => array());
+			}
+			self::$config['providers'][$provider] = $config;
+		}
 	}
 	
 	public static function getConfig() {

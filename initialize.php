@@ -5,6 +5,9 @@ if (!defined('INCLUDE_PATH'))	define('INCLUDE_PATH', __DIR__);
 if (!defined('MODELS_PATH'))	define('MODELS_PATH', LIB_PATH . '/models');
 if (!defined('FILES_PATH'))		define('FILES_PATH', realpath(LIB_PATH . '/../files'));
 
+define('FILE_GROUP', 'web');
+define('FILE_MOD', 0660);
+
 set_include_path(INCLUDE_PATH);
 
 spl_autoload_register(function($class) {
@@ -48,5 +51,5 @@ include LIB_PATH . '/enums.php';
 if (isset(Cfg::$db)) {
 	Db::init(Cfg::$db);
 }
-Translation::addLanguage('ru', array('name' => 'Русский', 'locale' => 'ru_RU.utf8'));
+Translation::addLanguage('ru', array('name' => 'Русский', 'default' => true, 'hreflang' => 'ru', 'locale' => 'ru_RU.utf8'));
 Dater::init('Europe/Moscow');

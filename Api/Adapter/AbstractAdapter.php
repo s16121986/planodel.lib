@@ -19,8 +19,8 @@ abstract class AbstractAdapter{
 	}
 
 	private function getColumnTable($settings, $name, $field = false) {
-		if ($this->_api->getAttribute($name)) {
-			return $this->_api->table() . ($field ? '.' . $name : '');
+		if (($attribute = $this->_api->getAttribute($name))) {
+			return $this->_api->table() . ($field ? '.' . Translation::getColumn($attribute) : '');
 		}
 		foreach ($settings->joins as $join) {
 			if (($col = $join->getColumn($name))) {
@@ -112,7 +112,7 @@ abstract class AbstractAdapter{
 				$quotedValue = Db::quote($boundValue);
 				foreach ($settings->quicksearch->getColumns() as $column) {
 					if (($attribute = $this->_api->getAttribute($column))) {
-						$table = $this->_api->table() . '.`' . $column;
+						$table = $this->_api->table() . '.`' . Translation::getColumn($attribute);
 						switch ($attribute->getType()) {
 							case \AttributeType::Boolean:
 								$or[] = $table . '`=' . ($value ? '1' : '0');

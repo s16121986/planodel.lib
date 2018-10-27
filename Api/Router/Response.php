@@ -31,10 +31,4 @@ class Response extends Result{
 		echo $format->getContent();
 	}
 	
-	public function setException(Exception $e) {
-		$code = $e->getCode();
-		$this->setHttpCode($code ? $code : 500);
-		return parent::setException($e);
-	}
-	
 }

@@ -429,7 +429,7 @@ class Controller_Action{
 	protected function initUrl() {
 		$result = false;
 		$request = $this->getRequest();
-		$path = trim($request->getPathInfo(), Url::URI_DELIMITER);
+		$path = trim(urldecode($request->getPathInfo()), Url::URI_DELIMITER);
 		if ($path) {
 			$parts = explode(Url::URI_DELIMITER, $path);
 		} else {

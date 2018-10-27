@@ -100,9 +100,8 @@ class Paginator{
 		}
 		return '<a href="' . $url . '">' . $text . '</a>';
 	}
-
-	public function render() {
-
+	
+	public function calculate() {
 		$pageCount = $this->getPageCount();
 		if ($pageCount > 1) {
 			$pages = new \stdClass();
@@ -136,7 +135,14 @@ class Paginator{
 			$pages->pagesInRange     = $pagesInRange;
 			$pages->firstPageInRange = $firstPageInRange;
 			$pages->lastPageInRange  = $lastPageInRange;
+			return $pages;
+		}
+		return null;
+	}
 
+	public function render() {
+		$pages = $this->calculate();
+		if ($pages) {
 			$f = $this->_controller->getHelper('viewRenderer')->getModuleDirectory() . '/views/layouts/paginator.phtml';
 			ob_start();
 			include $f;

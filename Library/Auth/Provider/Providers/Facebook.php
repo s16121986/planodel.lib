@@ -13,7 +13,7 @@ class Facebook extends OAuth2{
 	}
 
 	public function getProfile() {
-		$response = $this->api('me', 'GET', array('fields' => 'id,name,email,gender,token_for_business'));
+		$response = $this->api('me', 'GET', array('fields' => 'id,name,email,gender'));
 		if (!$response->id) {
 			throw new Exception('User profile request failed! ' . $this->name . ' returned an invalid response.', 6);
 		}

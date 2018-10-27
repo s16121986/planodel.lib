@@ -22,5 +22,29 @@ abstract class Util {
 		}
 		return false;
 	}
+	
+	protected static function getHeader($name) {
+
+        // Try to get it from the $_SERVER array first
+        $temp = 'HTTP_' . strtoupper(str_replace('-', '_', $name));
+        if (isset($_SERVER[$temp]) && $_SERVER[$temp])
+            return $_SERVER[$temp];
+		elseif (isset($_SERVER['REDIRECT_' . $temp]) && $_SERVER['REDIRECT_' . $temp])
+			return $_SERVER['REDIRECT_' . $temp];
+
+        // This seems to be the only way to get the Authorization header on
+        // Apache
+        if (function_exists('apache_request_headers')) {
+            $headers = apache_request_headers();
+			$name = strtolower($name);
+			foreach ($headers as $k => $v) {
+				if (strtolower($k) == $name) {
+					return $v;
+				}
+			}
+        } elseif (function_exists('getallheaders')) return getallheaders();
+
+        return false;
+    }
 
 }

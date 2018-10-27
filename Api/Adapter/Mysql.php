@@ -139,9 +139,6 @@ class Mysql extends AbstractAdapter{
 		if (!isset(self::$_comparisonTypesAssoc[$item->comparisonType])) {
 			return;
 		}
-		$column = '`' . $item->table . '`.`' . $item->name . '`';
-		$condition = self::$_comparisonTypesAssoc[$item->comparisonType];
-		$value = $item->value;
 		if (($attribute = $item->attribute)) {
 
 		} elseif ($item->name === 'id') {
@@ -149,6 +146,9 @@ class Mysql extends AbstractAdapter{
 		} else {
 			$attribute = $this->_api->getAttribute($item->name);
 		}
+		$column = '`' . $item->table . '`.`' . ($attribute ? Translation::getColumn($attribute) : $item->name) . '`';
+		$condition = self::$_comparisonTypesAssoc[$item->comparisonType];
+		$value = $item->value;
 		if (in_array($item->comparisonType, self::$_simpleComparisonTypes)) {
 			$value = self::foramtValue($attribute, $value, $item->comparisonType);
 			if (null === $value) {

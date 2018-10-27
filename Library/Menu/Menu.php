@@ -105,7 +105,8 @@ class Menu extends AbstractItem{
 		$html = '';
 		$class = array();
 		//var_dump($this->getRoot()->options, $this->parent);
-		if ($item->action && $item->action === $this->getRoot()->current) {
+		$current = $this->getRoot()->current;
+		if ($current && ($item->action === $current || $item->id === $current || $item->key === $current)) {
 			$class[] = 'current';
 		}
 		$node = $this->itemNodeType;

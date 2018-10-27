@@ -83,10 +83,11 @@ class File extends \File{
 	}
 	
 	protected static function chmod($filename) {
-		if (is_file($filename)) {
-			chmod($filename, 0660);
+		if (defined('FILE_MOD') && FILE_MOD && is_file($filename)) {
+			chmod($filename, FILE_MOD);
 		}
-		chgrp($filename, 'web');
+		if (defined('FILE_GROUP') && FILE_GROUP)
+			chgrp($filename, FILE_GROUP);
 	}
 
 	protected function init() {

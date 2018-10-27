@@ -44,6 +44,7 @@ class Menu extends Api{
 		foreach ($items as $item) {
 			if ($item['page_id']) {
 				$pageApi->findById($item['page_id']);
+				$item['action'] = $pageApi->dir;
 				$item['href'] = $pageApi->getPath();
 			}
 			$menu->add($item);

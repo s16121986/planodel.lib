@@ -21,7 +21,7 @@ class User extends Api{
 			->addAttribute('patronymic', 'string', array('length' => 50))
 			->addAttribute('presentation', 'string', array('length' => 255))
 			->addAttribute('login', 'string', array('length' => 50))
-			->addAttribute('password', 'password', array('regexp' => '/^[a-z0-9]{6,}$/i'))
+			->addAttribute('password', 'password', array('regexp' => '/^[a-z0-9_!@#$%^&+=]{6,}$/i'))
 			->addAttribute('email', 'string', array('length' => 80, 'notnull' => false))
 			->addAttribute('phone', 'string', array('length' => 20, 'notnull' => false))
 			->addAttribute('gender', 'enum', array('enum' => 'USER_GENDER', 'notnull' => false))

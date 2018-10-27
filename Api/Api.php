@@ -150,8 +150,8 @@ abstract class Api extends Api\Util\BaseApi{
 	public function __get($name) {
 		switch (true) {
 			case $name === 'table':return $this->_table;
-			case isset($this->_data[$name]):return $this->_data[$name];
-			case isset($this->_record[$name]):return $this->_record[$name];
+			case array_key_exists($name, $this->_data):return $this->_data[$name];
+			case array_key_exists($name, $this->_record):return $this->_record[$name];
 			case isset($this->tabularSections[$name]):return $this->tabularSections[$name];
 			//case isset($this->_attributes[$name]):return $this->_attributes[$name];
 		}

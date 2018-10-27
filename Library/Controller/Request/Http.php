@@ -972,9 +972,10 @@ class Controller_Request_Http extends Controller_Request_Abstract{
 
         // Try to get it from the $_SERVER array first
         $temp = 'HTTP_' . strtoupper(str_replace('-', '_', $header));
-        if (!empty($_SERVER[$temp])) {
+        if (!empty($_SERVER[$temp]))
             return $_SERVER[$temp];
-        }
+		elseif (isset($_SERVER['REDIRECT_' . $temp]) && $_SERVER['REDIRECT_' . $temp])
+			return $_SERVER['REDIRECT_' . $temp];
 
         // This seems to be the only way to get the Authorization header on
         // Apache

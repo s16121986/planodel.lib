@@ -68,9 +68,7 @@ abstract class AbstractParent extends Text{
 			$valueArr = array();
 			foreach ($this->elements as $element) {
 				$key = $element->name;
-				if (isset($value[$key])) {
-					$element->setValue($value[$key]);
-				}
+				$element->setValue(isset($value[$key]) ? $value[$key] : null);
 				$valueArr[$key] = $element->getValue();
 				if (null !== $element->getValue()) {
 					$isEmpty = false;
